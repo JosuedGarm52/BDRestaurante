@@ -1,0 +1,1 @@
+Los cogidos se encuentran en la carpeta BDproj
