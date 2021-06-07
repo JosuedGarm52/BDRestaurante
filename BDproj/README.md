@@ -1,1 +1,1 @@
-Los codidos se encuentran en la carpeta BDproj
+Los codigos se encuentran en la carpeta BDproj
