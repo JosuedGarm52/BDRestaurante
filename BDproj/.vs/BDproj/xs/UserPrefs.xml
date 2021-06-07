@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{31284F18-BD0A-426B-BC62-EA58C1DDD703}|Default">
+  <MonoDevelop.Ide.ItemProperties.BDproj PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="BDproj/MainWindow.cs">
+    <Files>
+      <File FileName="BDproj/BaseDato.cs" Line="40" Column="14" />
+      <File FileName="BDproj/MainWindow.cs" Line="129" Column="52" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BDproj" expanded="True">
+            <Node name="BDproj" expanded="True">
+              <Node name="MainWindow.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
