@@ -178,6 +178,20 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaPlatillo.AppendColumn(Columnaid_plato3);
+        TreeViewColumn ColumnaDescripcion = new TreeViewColumn
+        {
+            Title = "Descripcion",
+            Expand = true,
+            Sizing = TreeViewColumnSizing.Fixed
+        };
+        TablaPlatillo.AppendColumn(ColumnaDescripcion);
+        TreeViewColumn Columnanivel = new TreeViewColumn
+        {
+            Title = "Nivel",
+            Expand = true,
+            Sizing = TreeViewColumnSizing.Fixed
+        };
+        TablaPlatillo.AppendColumn(Columnanivel);
         //El numero de typeifStrings depende a la cantidad de columnas
         Lutiliza = new Gtk.ListStore(typeof(string), typeof(string), typeof(string));
         Lcategoria = new ListStore(typeof(string), typeof(string), typeof(string), typeof(string));
@@ -261,7 +275,7 @@ public partial class MainWindow : Gtk.Window
     protected void note3_SwitchPage(object o, SwitchPageArgs args)
     {
         VaciarText1();
-        MensajeError("" +notebook3.Page);
+        //MensajeError("" +notebook3.Page);
     }
     void VaciarText1()
     {
@@ -356,5 +370,26 @@ public partial class MainWindow : Gtk.Window
 
     protected void btnMostrar_Clicked(object sender, EventArgs e)
     {
+        MostrarTabla(notebook1.Page);
+    }
+
+    private void MostrarTabla(int NumPag)
+    {
+        try
+        {
+            switch (NumPag)
+            {
+                case 0:
+
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            MensajeError("" + ex);
+        }
+
     }
 }
