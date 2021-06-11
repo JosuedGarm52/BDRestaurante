@@ -30,9 +30,13 @@ namespace BDproj
         {
             con.Close();
         }
-        public void CrearComando(String consulta)
+        public void ConsultarComando(String consulta)
         {
             cmd = new MySqlCommand(consulta, con);
+        }
+        public MySqlCommand ConsultarComando(String consulta,String NoValor)
+        {
+            return new MySqlCommand(consulta, con);
         }
         public void Insertar(string sql)
         {

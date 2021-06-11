@@ -205,7 +205,7 @@ public partial class MainWindow
 		this.notebook3 = new global::Gtk.Notebook();
 		this.notebook3.CanFocus = true;
 		this.notebook3.Name = "notebook3";
-		this.notebook3.CurrentPage = 3;
+		this.notebook3.CurrentPage = 5;
 		// Container child notebook3.Gtk.Notebook+NotebookChild
 		this.table3 = new global::Gtk.Table(((uint)(4)), ((uint)(2)), false);
 		this.table3.Name = "table3";
@@ -836,7 +836,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 3;
+		this.notebook1.CurrentPage = 0;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow();
 		this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";

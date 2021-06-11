@@ -2,6 +2,7 @@
 using BDproj;
 using BDproj.Clases;
 using Gtk;
+using MySql.Data.MySqlClient;
 
 public partial class MainWindow : Gtk.Window
 {
@@ -88,8 +89,15 @@ public partial class MainWindow : Gtk.Window
         Columnaid_categ.AddAttribute(activeCell, "pixbuf", 6);
         Columnaid_encarg1.PackStart(activeCell, false);
         Columnaid_encarg1.AddAttribute(activeCell, "pixbuf", 6);
+        //Utiliza
         TablaUtil.AppendColumn(Columnaid_ingred);
         TablaUtil.AppendColumn(ColumnaCantidad);
+        CellRendererText utilNameCell = new CellRendererText();
+        Columnaid_ingred.PackStart(utilNameCell, true);
+        Columnaid_ingred.AddAttribute(utilNameCell, "text", 1);
+        ColumnaCantidad.PackStart(utilNameCell, true);
+        ColumnaCantidad.AddAttribute(utilNameCell, "text", 2); 
+        //Utiliza
         TablaCat.AppendColumn(Columnaid_categ);
         //TreeViewColumn Columnaid_plato1 = Columnaid_plato;
         TablaCat.AppendColumn(Columnaid_plato1);
@@ -102,12 +110,19 @@ public partial class MainWindow : Gtk.Window
         CellRendererText id_categoriaNameCell = new CellRendererText();
         Columnaid_categ.PackStart(id_categoriaNameCell, true);
         Columnaid_categ.AddAttribute(id_categoriaNameCell, "text", 0);
-        CellRendererText id_plato1NameCell = new CellRendererText();
-        Columnaid_plato1.PackStart(id_plato1NameCell, true);
-        Columnaid_plato1.AddAttribute(id_plato1NameCell, "text", 1);
-        CellRendererText id_EncargadoNameCell = new CellRendererText();
-        Columnaid_encarg1.PackStart(id_EncargadoNameCell, true);
-        Columnaid_encarg1.AddAttribute(id_EncargadoNameCell, "text", 0);
+        //Categoria
+        CellRendererText CategoriaNameCell = new CellRendererText();
+        Columnaid_plato1.PackStart(CategoriaNameCell, true);
+        Columnaid_plato1.AddAttribute(CategoriaNameCell, "text", 1);
+        ColumnaDescri.PackStart(CategoriaNameCell, true);
+        ColumnaDescri.AddAttribute(CategoriaNameCell, "text", 2);
+        Columnaid_encarg.PackStart(CategoriaNameCell, true);
+        Columnaid_encarg.AddAttribute(CategoriaNameCell, "text", 3);
+        //Categoria
+        //Encargado
+        CellRendererText EncargadoNameCell = new CellRendererText();
+        Columnaid_encarg1.PackStart(EncargadoNameCell, true);
+        Columnaid_encarg1.AddAttribute(EncargadoNameCell, "text", 0);
         TreeViewColumn ColumnaNombre = new TreeViewColumn
         {
             Title = "Nombre",
@@ -115,6 +130,8 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaEnc.AppendColumn(ColumnaNombre);
+        ColumnaNombre.PackStart(EncargadoNameCell, true);
+        ColumnaNombre.AddAttribute(EncargadoNameCell, "text", 1);
         TreeViewColumn ColumnaApellido = new TreeViewColumn //forma base
         {
             Title = "Apellido",
@@ -122,6 +139,11 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaEnc.AppendColumn(ColumnaApellido);//forma base 
+        ColumnaApellido.PackStart(EncargadoNameCell, true);
+        ColumnaApellido.AddAttribute(EncargadoNameCell, "text", 2);
+        //Plato
+        CellRendererText PlatoNameCell = new CellRendererText();
+
         TreeViewColumn Columnaid_plato2 = new TreeViewColumn
         {
             Title = "id plato",
@@ -129,6 +151,8 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaPlato.AppendColumn(Columnaid_plato2);
+        Columnaid_plato2.PackStart(PlatoNameCell, true);
+        Columnaid_plato2.AddAttribute(PlatoNameCell, "text", 0); 
         TreeViewColumn ColumnaPrecio = new TreeViewColumn
         {
             Title = "Precio",
@@ -136,6 +160,9 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         }; 
         TablaPlato.AppendColumn(ColumnaPrecio);
+        ColumnaPrecio.PackStart(PlatoNameCell, true);
+        ColumnaPrecio.AddAttribute(PlatoNameCell, "text", 1);
+        //ingrediente
         TreeViewColumn Columnaid_ing = new TreeViewColumn
         {
             Title = "id ingrediente",
@@ -160,10 +187,21 @@ public partial class MainWindow : Gtk.Window
             Expand = true,
             Sizing = TreeViewColumnSizing.Fixed
         };
+        CellRendererText IngredNameCell = new CellRendererText();
         TablaIng.AppendColumn(Columnaid_ing);
         TablaIng.AppendColumn(ColumnaIng);
         TablaIng.AppendColumn(ColumnaAlmacen);
         TablaIng.AppendColumn(ColumnaUnid);
+        Columnaid_ing.PackStart(IngredNameCell, true);
+        Columnaid_ing.AddAttribute(IngredNameCell, "text", 0);
+        ColumnaIng.PackStart(IngredNameCell, true);
+        ColumnaIng.AddAttribute(IngredNameCell, "text", 1);
+        ColumnaAlmacen.PackStart(IngredNameCell, true);
+        ColumnaAlmacen.AddAttribute(IngredNameCell, "text", 2);
+        ColumnaUnid.PackStart(IngredNameCell, true);
+        ColumnaUnid.AddAttribute(IngredNameCell, "text", 3);
+        //Platillo
+        CellRendererText PlatilloNameCell = new CellRendererText();
         TreeViewColumn Columnaid_Platillo = new TreeViewColumn
         {
             Title = "id Platillo",
@@ -171,6 +209,8 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaPlatillo.AppendColumn(Columnaid_Platillo);
+        Columnaid_Platillo.PackStart(PlatilloNameCell, true);
+        Columnaid_Platillo.AddAttribute(PlatilloNameCell, "text", 0);
         TreeViewColumn Columnaid_plato3= new TreeViewColumn
         {
             Title = "id Plato",
@@ -178,6 +218,8 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaPlatillo.AppendColumn(Columnaid_plato3);
+        Columnaid_plato3.PackStart(PlatilloNameCell, true);
+        Columnaid_plato3.AddAttribute(PlatilloNameCell, "text", 1);
         TreeViewColumn ColumnaDescripcion = new TreeViewColumn
         {
             Title = "Descripcion",
@@ -185,6 +227,8 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaPlatillo.AppendColumn(ColumnaDescripcion);
+        ColumnaDescripcion.PackStart(PlatilloNameCell, true);
+        ColumnaDescripcion.AddAttribute(PlatilloNameCell, "text", 2);
         TreeViewColumn Columnanivel = new TreeViewColumn
         {
             Title = "Nivel",
@@ -192,6 +236,9 @@ public partial class MainWindow : Gtk.Window
             Sizing = TreeViewColumnSizing.Fixed
         };
         TablaPlatillo.AppendColumn(Columnanivel);
+        Columnanivel.PackStart(PlatilloNameCell, true);
+        Columnanivel.AddAttribute(PlatilloNameCell, "text", 3);
+
         //El numero de typeifStrings depende a la cantidad de columnas
         Lutiliza = new Gtk.ListStore(typeof(string), typeof(string), typeof(string));
         Lcategoria = new ListStore(typeof(string), typeof(string), typeof(string), typeof(string));
@@ -206,7 +253,8 @@ public partial class MainWindow : Gtk.Window
         TablaIng.Model = LIngred;
         TablaPlatillo.Model = LPlatillo;
         this.ShowAll();
-    }
+        //Categoria, plato, ingrediente, platillo, encargado y utiliza
+        }
     
     FileChooserButton fileChooserButton1 = new FileChooserButton(dialog);
     static Dialog dialog = new Dialog();
@@ -230,6 +278,7 @@ public partial class MainWindow : Gtk.Window
         }
         catch (Exception ex)
         {
+            //No imprime nada?
             MessageDialog mensaje = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Error, ButtonsType.Ok, "Error" + ex);
             mensaje.Run();
             mensaje.Destroy();
@@ -256,13 +305,13 @@ public partial class MainWindow : Gtk.Window
     }
     void MensajeError(string x)
     {
-        MessageDialog mensaje = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Error, ButtonsType.Ok, x);
+        MessageDialog mensaje = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Error, ButtonsType.Ok, "Error: "+x);
         mensaje.Run();
         mensaje.Destroy();
     }
     void Mensaje(string x)
     {
-        MessageDialog mensaje = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, x);
+        MessageDialog mensaje = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, "Error: "+ x);
         mensaje.Run();
         mensaje.Destroy();
     }
@@ -370,21 +419,109 @@ public partial class MainWindow : Gtk.Window
 
     protected void btnMostrar_Clicked(object sender, EventArgs e)
     {
-        MostrarTabla(notebook1.Page);
+        MostrarTabla();
     }
 
-    private void MostrarTabla(int NumPag)
+    private void MostrarTabla()
     {
+        string query;
+        MySqlCommand valor;
+        MySqlDataReader reader;
         try
         {
-            switch (NumPag)
+            switch (notebook1.Page)
             {
                 case 0:
+                    Lcategoria.Clear();
+                    query = "SELECT * FROM `categoria`";
+                    bd.Conectar();
+                    valor = bd.ConsultarComando(query,"");
+                    reader = valor.ExecuteReader();
 
+                    while(reader.Read())
+                    {
+                        Lcategoria.AppendValues($"{reader["id_categoria"].ToString()}", $"{reader["id_plato"].ToString()}", $"{reader["descripcion"].ToString()}", $"{reader["id_encargado"].ToString()}");
+                    }
+                    reader.Close();
+                    bd.Desconectar();
+                    break;
+                case 1:
+                    Lencargado.Clear();
+                    query = "SELECT * FROM `encargado`";
+                    bd.Conectar();
+                    valor = bd.ConsultarComando(query, "");
+                    reader = valor.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Lencargado.AppendValues($"{reader["id_encargado"].ToString()}", $"{reader["nombre"].ToString()}", $"{reader["apellido"].ToString()}");
+                    }
+                    reader.Close();
+                    bd.Desconectar();
+                    break;
+                case 2:
+                    LIngred.Clear();
+                    query = "SELECT * FROM `ingred`";
+                    bd.Conectar();
+                    valor = bd.ConsultarComando(query, "");
+                    reader = valor.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        LIngred.AppendValues($"{reader["id_ingrediente"].ToString()}", $"{reader["ingrediente"].ToString()}", $"{reader["almacen"].ToString()}", $"{ reader["unidades"].ToString()}");
+                    }
+                    reader.Close();
+                    bd.Desconectar();
+                    break;
+                case 3:
+                    LPlatillo.Clear();
+                    query = "SELECT * FROM `platillo`";
+                    bd.Conectar();
+                    valor = bd.ConsultarComando(query, "");
+                    reader = valor.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        LPlatillo.AppendValues($"{reader["id_platillo"].ToString()}", $"{reader["id_plato"].ToString()}", $"{reader["descripcion"].ToString()}", $"{reader["nivel"].ToString()}");
+                    }
+                    reader.Close();
+                    bd.Desconectar();
+                    break;
+                case 4:
+                    LPlato.Clear();
+                    query = "SELECT * FROM `plato`";
+                    bd.Conectar();
+                    valor = bd.ConsultarComando(query, "");
+                    reader = valor.ExecuteReader();
+
+                    while (reader.Read())
+                    {//Falta datos
+                        LPlato.AppendValues($"{reader["id_plato"].ToString()}", $"{reader["precio"].ToString()}");
+                    }
+                    reader.Close();
+                    bd.Desconectar();
+                    break;
+                case 5:
+                    Lutiliza.Clear();
+                    query = "SELECT * FROM `utiliza`";
+                    bd.Conectar();
+                    valor = bd.ConsultarComando(query, "");
+                    reader = valor.ExecuteReader();
+
+                    while (reader.Read())
+                    {//Falta datos
+                        Lutiliza.AppendValues($"{reader["id_plato"].ToString()}", $"{reader["id_ingrediente"].ToString()}", $"{reader["cantidad"].ToString()}");
+                    }
+                    reader.Close();
+                    bd.Desconectar();
                     break;
                 default:
+                    MensajeError("Ocurrio un error inesperado");
                     break;
             }
+        }catch(MySqlException exx)
+        {
+            MensajeError("Error: " + exx);
         }
         catch (Exception ex)
         {
