@@ -6,7 +6,7 @@
   <import>
     <widget-library name="../bin/Debug/BDproj.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="583 395">
+  <widget class="Gtk.Window" id="MainWindow" design-size="723 395">
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
     <property name="Icon">stock:stock_search-and-replace Menu</property>
@@ -29,7 +29,7 @@
                   <widget class="Gtk.Notebook" id="notebook3">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">0</property>
+                    <property name="CurrentPage">3</property>
                     <signal name="ChangeCurrentPage" handler="note3_changecurrentpage" />
                     <signal name="SwitchPage" handler="note3_SwitchPage" />
                     <child>
@@ -1008,7 +1008,7 @@
                   </widget>
                   <packing>
                     <property name="X">16</property>
-                    <property name="Y">9</property>
+                    <property name="Y">6</property>
                   </packing>
                 </child>
                 <child>
@@ -1024,7 +1024,7 @@
                         <child>
                           <widget class="Gtk.Table" id="table1">
                             <property name="MemberName" />
-                            <property name="NColumns">4</property>
+                            <property name="NColumns">5</property>
                             <property name="RowSpacing">6</property>
                             <property name="ColumnSpacing">6</property>
                             <child>
@@ -1037,8 +1037,8 @@
                                 <signal name="Clicked" handler="comprobar_clicked" />
                               </widget>
                               <packing>
-                                <property name="LeftAttach">1</property>
-                                <property name="RightAttach">2</property>
+                                <property name="LeftAttach">2</property>
+                                <property name="RightAttach">3</property>
                                 <property name="AutoSize">True</property>
                                 <property name="XOptions">Fill</property>
                                 <property name="YOptions">Fill</property>
@@ -1060,8 +1060,8 @@
                                 <signal name="Clicked" handler="btnDesco_desconectar" />
                               </widget>
                               <packing>
-                                <property name="LeftAttach">2</property>
-                                <property name="RightAttach">3</property>
+                                <property name="LeftAttach">3</property>
+                                <property name="RightAttach">4</property>
                                 <property name="AutoSize">True</property>
                                 <property name="XOptions">Fill</property>
                                 <property name="YOptions">Fill</property>
@@ -1095,6 +1095,29 @@
                               </packing>
                             </child>
                             <child>
+                              <widget class="Gtk.Button" id="BtnMostrar">
+                                <property name="MemberName" />
+                                <property name="CanFocus">True</property>
+                                <property name="Type">TextOnly</property>
+                                <property name="Label" translatable="yes">Mostrar</property>
+                                <property name="UseUnderline">True</property>
+                                <signal name="Clicked" handler="btnMostrar_Clicked" />
+                              </widget>
+                              <packing>
+                                <property name="LeftAttach">1</property>
+                                <property name="RightAttach">2</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">True</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
                               <widget class="Gtk.Button" id="btnSalir">
                                 <property name="MemberName" />
                                 <property name="CanFocus">True</property>
@@ -1104,8 +1127,8 @@
                                 <signal name="Clicked" handler="Salir" />
                               </widget>
                               <packing>
-                                <property name="LeftAttach">3</property>
-                                <property name="RightAttach">4</property>
+                                <property name="LeftAttach">4</property>
+                                <property name="RightAttach">5</property>
                                 <property name="AutoSize">True</property>
                                 <property name="XOptions">Fill</property>
                                 <property name="YOptions">Fill</property>
@@ -1122,7 +1145,7 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="Gtk.Label" id="GtkLabel4">
+                      <widget class="Gtk.Label" id="GtkLabel6">
                         <property name="MemberName" />
                         <property name="LabelProp" translatable="yes">&lt;b&gt;Botones&lt;/b&gt;</property>
                         <property name="UseMarkup">True</property>
@@ -1133,8 +1156,202 @@
                     </child>
                   </widget>
                   <packing>
-                    <property name="X">12</property>
-                    <property name="Y">295</property>
+                    <property name="X">14</property>
+                    <property name="Y">236</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Frame" id="frame1">
+                    <property name="MemberName" />
+                    <property name="ShadowType">None</property>
+                    <child>
+                      <widget class="Gtk.Alignment" id="GtkAlignment1">
+                        <property name="MemberName" />
+                        <property name="Xalign">0</property>
+                        <property name="Yalign">0</property>
+                        <property name="LeftPadding">12</property>
+                        <child>
+                          <widget class="Gtk.Notebook" id="notebook1">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="CurrentPage">3</property>
+                            <child>
+                              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow1">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <child>
+                                  <widget class="Gtk.NodeView" id="TablaCat">
+                                    <property name="MemberName" />
+                                    <property name="CanFocus">True</property>
+                                    <property name="ShowScrollbars">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Label" id="label1">
+                                <property name="MemberName" />
+                                <property name="LabelProp" translatable="yes">Categoria</property>
+                              </widget>
+                              <packing>
+                                <property name="type">tab</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow2">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <child>
+                                  <widget class="Gtk.NodeView" id="TablaEnc">
+                                    <property name="MemberName" />
+                                    <property name="CanFocus">True</property>
+                                    <property name="ShowScrollbars">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="Position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Label" id="label2">
+                                <property name="MemberName" />
+                                <property name="LabelProp" translatable="yes">Encargado</property>
+                              </widget>
+                              <packing>
+                                <property name="type">tab</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <child>
+                                  <widget class="Gtk.NodeView" id="TablaIng">
+                                    <property name="MemberName" />
+                                    <property name="CanFocus">True</property>
+                                    <property name="ShowScrollbars">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="Position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Label" id="label3">
+                                <property name="MemberName" />
+                                <property name="LabelProp" translatable="yes">Ingrediente</property>
+                              </widget>
+                              <packing>
+                                <property name="type">tab</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow3">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <child>
+                                  <widget class="Gtk.NodeView" id="TablaPlatillo">
+                                    <property name="MemberName" />
+                                    <property name="CanFocus">True</property>
+                                    <property name="ShowScrollbars">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="Position">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Label" id="label15">
+                                <property name="MemberName" />
+                                <property name="LabelProp" translatable="yes">Platillo</property>
+                              </widget>
+                              <packing>
+                                <property name="type">tab</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow4">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <child>
+                                  <widget class="Gtk.NodeView" id="TablaPlato">
+                                    <property name="MemberName" />
+                                    <property name="WidthRequest">0</property>
+                                    <property name="CanFocus">True</property>
+                                    <property name="ShowScrollbars">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="Position">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Label" id="label16">
+                                <property name="MemberName" />
+                                <property name="LabelProp" translatable="yes">Plato</property>
+                              </widget>
+                              <packing>
+                                <property name="type">tab</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow5">
+                                <property name="MemberName" />
+                                <property name="HeightRequest">200</property>
+                                <property name="ShadowType">In</property>
+                                <child>
+                                  <widget class="Gtk.NodeView" id="TablaUtil">
+                                    <property name="MemberName" />
+                                    <property name="CanFocus">True</property>
+                                    <property name="ShowScrollbars">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="Position">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Label" id="label21">
+                                <property name="MemberName" />
+                                <property name="LabelProp" translatable="yes">Utiliza</property>
+                              </widget>
+                              <packing>
+                                <property name="type">tab</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Label" id="GtkLabel7">
+                        <property name="MemberName" />
+                        <property name="LabelProp" translatable="yes">&lt;b&gt;Consultas&lt;/b&gt;</property>
+                        <property name="UseMarkup">True</property>
+                      </widget>
+                      <packing>
+                        <property name="type">label_item</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="X">7</property>
+                    <property name="Y">327</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Image" id="image1">
+                    <property name="MemberName" />
+                    <property name="Pixbuf">stock:gtk-dialog-error Menu</property>
+                  </widget>
+                  <packing>
+                    <property name="X">478</property>
+                    <property name="Y">351</property>
                   </packing>
                 </child>
               </widget>
