@@ -5,13 +5,17 @@ namespace BDproj
 {
     public class BaseDato
     {
-        public MySqlConnection con = new MySqlConnection("Server=localhost; Database=restaurante ;User=root; Password=");
+        public MySqlConnection con;
         //static DataTable dt;
         public MySqlCommand cmd;
         public MySqlDataReader dr;
+        string server = "localhost";
+        string database = "restaurante";
+        string user = "root";
+        string password = "";
         public BaseDato()
         {
-
+            con = new MySqlConnection($"Server={server}; Database={database};User=root; Password={password}");
         }
         public void Conectar()
         {
@@ -62,6 +66,14 @@ namespace BDproj
         public void AsignarParametro(String param, MySqlDbType tipo, Object valor) 
         {
             cmd.Parameters.Add(param, tipo).Value = valor;
+        }
+        public void CambiarDatabase(string strserver, string strbasedato, string strUsuario, string strContraseña)
+        {
+            server = strserver;
+            database = strbasedato;
+            user = strUsuario;
+            password = strContraseña;
+            con = new MySqlConnection($"Server={server}; Database={database};User=root; Password={password}");
         }
     }
 }

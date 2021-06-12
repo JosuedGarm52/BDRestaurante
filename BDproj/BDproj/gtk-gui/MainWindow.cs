@@ -181,12 +181,14 @@ public partial class MainWindow
 
 	private global::Gtk.Image image1;
 
+	private global::Gtk.Button btnInfo;
+
 	protected virtual void Build()
 	{
 		global::Stetic.Gui.Initialize(this);
 		// Widget MainWindow
 		this.Name = "MainWindow";
-		this.Title = global::Mono.Unix.Catalog.GetString("MainWindow");
+		this.Title = global::Mono.Unix.Catalog.GetString("Restaurante");
 		this.Icon = global::Stetic.IconLoader.LoadIcon(this, "stock_search-and-replace", global::Gtk.IconSize.Menu);
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
@@ -964,6 +966,18 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w74 = ((global::Gtk.Fixed.FixedChild)(this.fixed3[this.image1]));
 		w74.X = 478;
 		w74.Y = 351;
+		// Container child fixed3.Gtk.Fixed+FixedChild
+		this.btnInfo = new global::Gtk.Button();
+		this.btnInfo.CanFocus = true;
+		this.btnInfo.Name = "btnInfo";
+		this.btnInfo.UseUnderline = true;
+		global::Gtk.Image w75 = new global::Gtk.Image();
+		w75.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_edit", global::Gtk.IconSize.Menu);
+		this.btnInfo.Image = w75;
+		this.fixed3.Add(this.btnInfo);
+		global::Gtk.Fixed.FixedChild w76 = ((global::Gtk.Fixed.FixedChild)(this.fixed3[this.btnInfo]));
+		w76.X = 668;
+		w76.Y = 11;
 		w1.Add(this.fixed3);
 		this.scrolledwindow3.Add(w1);
 		this.Add(this.scrolledwindow3);
@@ -983,5 +997,6 @@ public partial class MainWindow
 		this.btnInsertar.Clicked += new global::System.EventHandler(this.btnInsertar_insertar);
 		this.btnDesconectar.Clicked += new global::System.EventHandler(this.btnDesco_desconectar);
 		this.btnComp.Clicked += new global::System.EventHandler(this.comprobar_clicked);
+		this.btnInfo.Clicked += new global::System.EventHandler(this.btnInfo_click);
 	}
 }

@@ -529,4 +529,10 @@ public partial class MainWindow : Gtk.Window
         }
 
     }
+
+    protected void btnInfo_click(object sender, EventArgs e)
+    {
+        Window1 window = new Window1(ref bd);
+        window.Show();
+    }
 }

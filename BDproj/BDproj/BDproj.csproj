@@ -118,6 +118,8 @@
     <Compile Include="Clases\Platillo.cs" />
     <Compile Include="Clases\Plato.cs" />
     <Compile Include="Clases\Utiliza.cs" />
+    <Compile Include="Window1.cs" />
+    <Compile Include="gtk-gui\BDproj.Window1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
