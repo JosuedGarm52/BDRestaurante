@@ -438,6 +438,7 @@ public partial class MainWindow : Gtk.Window
                     MensajeError("Ocurrio un error inesperado");
                     break;
             }
+            MostrarTabla();
         }
         catch(Exception ex)
         {
@@ -574,12 +575,116 @@ public partial class MainWindow : Gtk.Window
     {
         try
         {
-            string updateCategoria = "UPDATE categoria SET descripcion=" + "'" + entDescripcion + "'" +
-            "WHERE id_categoria=" + "'" + cmbeCatIdcateg + "'";
-            bd.Conectar();
-            MySqlCommand valor = bd.ConsultarComando(updateCategoria, "");
-            valor.ExecuteNonQuery();
-            bd.Desconectar();
+            string update = "UPDATE `categoria` " +
+                $"SET `id_categoria`='CATNUEVA',`id_plato`='PLAT37',`descripcion`='NUEVA',`id_encargado`='ENC16' WHERE id_categoria = 'CATUPDATE'";
+            //string sql;
+            MySqlCommand cmb;
+            //if(notebook3.Page==0)
+            switch (notebook3.Page)
+            {
+                case 0:
+                    categ = new Categoria
+                    {
+                        id_categoria = cmbeCatIdcateg.Entry.Text,
+                        id_plato = cmbeCatIdplato.Entry.Text,
+                        Descripcion = entCatDesc.Text,
+                        id_encargado = cmbeCatIdEncar.Entry.Text
+                    };
+                    update = "UPDATE `categoria` " +
+                    $"SET `id_categoria`='{categ.id_categoria}',`id_plato`='{categ.id_plato}',`descripcion`='{categ.Descripcion}',`id_encargado`='{categ.id_encargado}' " +
+                    	$"WHERE id_categoria = '{categ.id_categoria}'";
+                    bd.Conectar();
+                    cmb = bd.ConsultarComando(update, "");
+                    cmb.ExecuteNonQuery();
+                    Mensaje("Se a actualizado el registro");
+                    bd.Desconectar();
+                    break;
+                case 1:
+                    enc = new Encargado
+                    {
+                        id_encargado = cmbeEncid.Entry.Text,
+                        Nombre = entNombre.Text,
+                        Apellido = entApellido.Text
+                    };
+                    update = "UPDATE `encargado` " +
+                    $"SET `id_encargado`='{enc.id_encargado}',`nombre`='{enc.Nombre}',`apellido`='{enc.Apellido}'" +
+                        $"WHERE id_encargado = '{enc.id_encargado}'";
+                    bd.Conectar();
+                    cmb = bd.ConsultarComando(update, "");
+                    cmb.ExecuteNonQuery();
+                    Mensaje("Se a actualizado el registro");
+                    bd.Desconectar();
+                    break;
+                case 2:
+                    ingred = new Ingred
+                    {
+                        id_ingrediente = cmbeIngid.Entry.Text,
+                        Ingrediente = entingrediente.Text,
+                        Almacen = entalmacen.Text,
+                        Unidad = entunidad.Text
+                    };
+                    update = "UPDATE `ingred` " +
+                    $"SET `id_ingrediente`='{ingred.id_ingrediente}',`ingrediente`='{ingred.Ingrediente}',`almacen`='{ingred.Almacen}',`unidades`='{ingred.Unidad}' " +
+                        $"WHERE id_ingrediente = '{ingred.Unidad}'";
+                    bd.Conectar();
+                    cmb = bd.ConsultarComando(update, "");
+                    cmb.ExecuteNonQuery();
+                    Mensaje("Se a actualizado el registro");
+                    bd.Desconectar();
+                    break;
+                case 3:
+                    platillo = new Platillo
+                    {
+                        id_platillo = cmbePlatilloId.Entry.Text,
+                        id_plato = cmbePlatilloidplato.Entry.Text,
+                        Descripcion = entDescripcion.Text,
+                        Nivel = entnivel.Text
+                    };
+                    update = "UPDATE `categoria` " +
+                    $"SET `id_platillo`='{platillo.id_platillo}',`id_plato`='{platillo.id_plato}',`descripcion`='{platillo.Descripcion}',`nivel`='{platillo.Nivel}' " +
+                        $"WHERE id_categoria = '{platillo.id_platillo}'";
+                    bd.Conectar();
+                    cmb = bd.ConsultarComando(update, "");
+                    cmb.ExecuteNonQuery();
+                    Mensaje("Se a actualizado el registro");
+                    bd.Desconectar();
+                    break;
+                case 4:
+                    plato = new Plato
+                    {
+                        id_plato = cmbePlatId.Entry.Text,
+                        Precio = entprecio.Text
+                    };
+                    update = "UPDATE `plato` " +
+                    $"SET `id_plato`='{plato.id_plato}',`precio`='{plato.Precio}'" +
+                        $"WHERE id_categoria = '{categ.id_categoria}'";
+                    bd.Conectar();
+                    cmb = bd.ConsultarComando(update, "");
+                    cmb.ExecuteNonQuery();
+                    Mensaje("Se a actualizado el registro");
+                    bd.Desconectar();
+                    break;
+                case 5:
+                    util = new Utiliza
+                    {
+                        id_plato = cmbeUtilidPlat.Entry.Text,
+                        id_ingrediente = cmbeUtilidIngred.Entry.Text,
+                        Cantidad = entcant.Text
+                    };
+                    update = "UPDATE `utiliza` " +
+                    $"SET `id_plato`='{util.id_plato}',`id_ingrediente`='{util.id_ingrediente}',`descripcion`='{util.Cantidad}'" +
+                        $"WHERE id_categoria = '{categ.id_categoria}'";
+                    bd.Conectar();
+                    cmb = bd.ConsultarComando(update, "");
+                    cmb.ExecuteNonQuery();
+                    Mensaje("Se a actualizado el registro");
+                    bd.Desconectar();
+                    break;
+                default:
+                    MensajeError("Ocurrio un error inesperado");
+                    break;
+            }
+            MostrarTabla();
         }
         catch (Exception ex)
         {
@@ -589,61 +694,7 @@ public partial class MainWindow : Gtk.Window
 
     protected void btnBorrar_cleck(object sender, EventArgs e)
     {
-        
-        try
-        {
-            switch (notebook3.Page)
-            {
-                case 0:
-                    categ = new Categoria
-                    {
-                        id_categoria = cmbeCatIdcateg.Entry.Text
-                    };
-                    string deleteCategoria = "DELETE FROM `categoria` " +
-                    	$"WHERE categoria.id_categoria = '{categ.id_categoria}'";
-
-                    bd.Conectar();
-                    var cmd = bd.ConsultarComando(deleteCategoria, "");
-                    cmd.ExecuteNonQuery();
-                    bd.Desconectar();
-                    break;
-                case 1:
-
-                    break;
-                case 2:
-                    ingred = new Ingred
-                    {
-
-                    };
-                    break;
-                case 3:
-                    platillo = new Platillo
-                    {
-
-                    };
-                    break;
-                case 4:
-                    plato = new Plato
-                    {
-
-                    };
-                    break;
-                case 5:
-                    util = new Utiliza
-                    {
-
-                    };
-                    break;
-                default:
-                    MensajeError("Ocurrio un error inesperado");
-                    break;
-            }
-        
-    }
-        catch (Exception ex)
-        {
-            MensajeError("" + ex);
-        }
+ 
     }
 
     protected void OnTablaEncSelectCursorRow(object o, SelectCursorRowArgs args)
@@ -744,10 +795,37 @@ public partial class MainWindow : Gtk.Window
                     MensajeError("Ocurrio un error inesperado");
                     break;
             }
+            MostrarTabla();
         }
         catch (Exception ex)
         {
             MensajeError("" + ex);
         }
+    }
+
+    protected void BtnMostrar_clicker(object sender, EventArgs e)
+    {
+        MostrarTabla();
+    }
+
+    protected void BtnInsertar_Clicked(object sender, EventArgs e)
+    {
+        btnInsertar_insertar(sender, e);
+    }
+
+    protected void Especial(object sender, EventArgs e)
+    {
+        LPlato.Clear();
+        string query = "SELECT * FROM `plato` WHERE plato.precio >'50000'";
+        bd.Conectar();
+        var valor = bd.ConsultarComando(query, "");
+        var reader = valor.ExecuteReader();
+
+        while (reader.Read())
+        {//Falta datos
+            LPlato.AppendValues($"{reader["id_plato"].ToString()}", $"{reader["precio"].ToString()}");
+        }
+        reader.Close();
+        bd.Desconectar();
     }
 }

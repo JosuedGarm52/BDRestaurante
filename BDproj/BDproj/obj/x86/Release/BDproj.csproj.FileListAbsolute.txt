@@ -120,3 +120,4 @@
 /home/josue-user/Repos/ProyectoC/C#/BDProyecto/BDproj/BDproj/obj/x86/Release/BDproj.csproj.CoreCompileInputs.cache
 /home/josue-user/Repos/ProyectoC/C#/BDProyecto/BDproj/BDproj/obj/x86/Release/BDproj.csproj.CopyComplete
 /home/josue-user/Repos/ProyectoC/C#/BDProyecto/BDproj/BDproj/obj/x86/Release/BDproj.exe
+/home/josue-user/Repos/ProyectoC/C#/BDProyecto/BDproj/BDproj/obj/x86/Release/BDproj.csprojAssemblyReference.cache

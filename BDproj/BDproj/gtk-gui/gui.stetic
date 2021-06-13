@@ -4,7 +4,7 @@
     <images-root-path>..</images-root-path>
   </configuration>
   <import>
-    <widget-library name="../bin/Debug/BDproj.exe" internal="true" />
+    <widget-library name="../bin/Release/BDproj.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="609 562">
     <property name="MemberName" />
@@ -29,7 +29,7 @@
                   <widget class="Gtk.Notebook" id="notebook3">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">5</property>
+                    <property name="CurrentPage">0</property>
                     <signal name="ChangeCurrentPage" handler="note3_changecurrentpage" />
                     <signal name="SwitchPage" handler="note3_SwitchPage" />
                     <child>
@@ -1229,9 +1229,6 @@
                               <placeholder />
                             </child>
                             <child>
-                              <placeholder />
-                            </child>
-                            <child>
                               <widget class="Gtk.Button" id="btnBorrar">
                                 <property name="MemberName" />
                                 <property name="CanFocus">True</property>
@@ -1303,13 +1300,38 @@
                               </packing>
                             </child>
                             <child>
+                              <widget class="Gtk.Button" id="btnEspecial">
+                                <property name="MemberName" />
+                                <property name="CanFocus">True</property>
+                                <property name="Type">TextOnly</property>
+                                <property name="Label" translatable="yes">Mostrar especial</property>
+                                <property name="UseUnderline">True</property>
+                                <signal name="Clicked" handler="Especial" />
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">1</property>
+                                <property name="BottomAttach">2</property>
+                                <property name="LeftAttach">2</property>
+                                <property name="RightAttach">3</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">True</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
                               <widget class="Gtk.Button" id="btnInsertar">
                                 <property name="MemberName" />
                                 <property name="CanFocus">True</property>
                                 <property name="Type">TextOnly</property>
                                 <property name="Label" translatable="yes">Insertar</property>
                                 <property name="UseUnderline">True</property>
-                                <signal name="Clicked" handler="btnInsertar_insertar" />
+                                <signal name="Clicked" handler="BtnInsertar_Clicked" />
                               </widget>
                               <packing>
                                 <property name="AutoSize">True</property>
@@ -1330,7 +1352,7 @@
                                 <property name="Type">TextOnly</property>
                                 <property name="Label" translatable="yes">Mostrar</property>
                                 <property name="UseUnderline">True</property>
-                                <signal name="Clicked" handler="btnMostrar_Clicked" />
+                                <signal name="Clicked" handler="BtnMostrar_clicker" />
                               </widget>
                               <packing>
                                 <property name="LeftAttach">1</property>
