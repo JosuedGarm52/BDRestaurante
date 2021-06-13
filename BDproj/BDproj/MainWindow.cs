@@ -311,7 +311,7 @@ public partial class MainWindow : Gtk.Window
     }
     void Mensaje(string x)
     {
-        MessageDialog mensaje = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, "Error: "+ x);
+        MessageDialog mensaje = new MessageDialog(null, DialogFlags.DestroyWithParent, MessageType.Info, ButtonsType.Ok, ""+ x);
         mensaje.Run();
         mensaje.Destroy();
     }
@@ -354,9 +354,11 @@ public partial class MainWindow : Gtk.Window
     {
         try
         {
+            bd.Conectar();
+            string sql;
             //if(notebook3.Page==0)
             switch (notebook3.Page)
-            {
+            { 
                 case 0:
                     categ = new Categoria
                     {
@@ -365,7 +367,7 @@ public partial class MainWindow : Gtk.Window
                         Descripcion = entCatDesc.Text,
                         id_encargado = cmbeCatIdEncar.Entry.Text
                     };
-                    string sql = "INSERT INTO `categoria` (`id_categoria`, `id_plato`, `descripcion`, `id_encargado`) " +
+                    sql = "INSERT INTO `categoria` (`id_categoria`, `id_plato`, `descripcion`, `id_encargado`) " +
                     	$"VALUES ('{categ.id_categoria}', '{categ.id_plato}', '{categ.Descripcion}', '{categ.id_encargado}');";
                     //$"VALUES ('CAT-0088', 'PLAT40', 'Plato de prueba', 'ENC12');";
                     bd.Insertar(sql);
@@ -374,32 +376,63 @@ public partial class MainWindow : Gtk.Window
                 case 1:
                     enc = new Encargado
                     {
-
+                        id_encargado = cmbeEncid.Entry.Text,
+                        Nombre = entNombre.Text,
+                        Apellido = entApellido.Text
                     };
+                    sql = "INSERT INTO `encargado` (`id_encargado`, `nombre`, `apellido`) " +
+                        $"VALUES ('{enc.id_encargado}', '{enc.Nombre}', '{enc.Apellido}');";
+                    bd.Insertar(sql);
+                    Mensaje("Se a insertado el registro");
                     break;
                 case 2:
                     ingred = new Ingred
                     {
-                       
+                        id_ingrediente = cmbeIngid.Entry.Text,
+                        Ingrediente = entingrediente.Text,
+                        Almacen = entalmacen.Text,
+                        Unidad = entunidad.Text
                     };
+                    sql = "INSERT INTO `ingred` (`id_ingrediente`, `ingrediente`, `almacen`, `unidades`) " +
+                        $"VALUES ('{ingred.id_ingrediente}', '{ingred.Ingrediente}', '{ingred.Almacen}', '{ingred.Unidad}');";
+                    bd.Insertar(sql);
+                    Mensaje("Se a insertado el registro");
                     break;
                 case 3:
                     platillo = new Platillo
                     {
-
+                        id_platillo = cmbePlatilloId.Entry.Text,
+                        id_plato = cmbePlatilloidplato .Entry.Text,
+                        Descripcion = entDescripcion.Text,
+                        Nivel = entnivel.Text
                     };
+                    sql = "INSERT INTO `platillo` (`id_platillo`, `id_plato`, `descripcion`, `nivel`) " +
+                        $"VALUES ('{platillo.id_platillo}', '{platillo.id_plato}', '{platillo.Descripcion}', '{platillo.Nivel}');";
+                    bd.Insertar(sql);
+                    Mensaje("Se a insertado el registro");
                     break;
                 case 4:
                     plato = new Plato
                     {
-
+                        id_plato = cmbePlatId.Entry.Text,
+                        Precio  = entprecio.Text
                     };
+                    sql = "INSERT INTO `plato` (`id_plato`, `foto`, `precio`) " +
+                       $"VALUES ('{plato.id_plato}', '{null}', '{plato.Precio}');";
+                    bd.Insertar(sql);
+                    Mensaje("Se a insertado el registro");
                     break;
                 case 5:
                     util = new Utiliza
                     {
-
+                        id_plato = cmbeUtilidPlat.Entry.Text,
+                        id_ingrediente = cmbeUtilidIngred.Entry.Text,
+                        Cantidad = entcant.Text
                     };
+                    sql = "INSERT INTO `utiliza` (`id_plato`, `id_ingrediente`, `cantidad`) " +
+                       $"VALUES ('{util.id_plato}', '{util.id_ingrediente}', '{util.Cantidad}');";
+                    bd.Insertar(sql);
+                    Mensaje("Se a insertado el registro");
                     break;
                 default:
                     MensajeError("Ocurrio un error inesperado");
@@ -410,6 +443,7 @@ public partial class MainWindow : Gtk.Window
         {
             MensajeError("" + ex);
         }
+        bd.Desconectar();
     }
 
     protected void btnDesco_desconectar(object sender, EventArgs e)
@@ -534,5 +568,186 @@ public partial class MainWindow : Gtk.Window
     {
         Window1 window = new Window1(ref bd);
         window.Show();
+    }
+
+    protected void btnUpdate_clieck(object sender, EventArgs e)
+    {
+        try
+        {
+            string updateCategoria = "UPDATE categoria SET descripcion=" + "'" + entDescripcion + "'" +
+            "WHERE id_categoria=" + "'" + cmbeCatIdcateg + "'";
+            bd.Conectar();
+            MySqlCommand valor = bd.ConsultarComando(updateCategoria, "");
+            valor.ExecuteNonQuery();
+            bd.Desconectar();
+        }
+        catch (Exception ex)
+        {
+            MensajeError(""+ex);
+        }
+    }
+
+    protected void btnBorrar_cleck(object sender, EventArgs e)
+    {
+        
+        try
+        {
+            switch (notebook3.Page)
+            {
+                case 0:
+                    categ = new Categoria
+                    {
+                        id_categoria = cmbeCatIdcateg.Entry.Text
+                    };
+                    string deleteCategoria = "DELETE FROM `categoria` " +
+                    	$"WHERE categoria.id_categoria = '{categ.id_categoria}'";
+
+                    bd.Conectar();
+                    var cmd = bd.ConsultarComando(deleteCategoria, "");
+                    cmd.ExecuteNonQuery();
+                    bd.Desconectar();
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+                    ingred = new Ingred
+                    {
+
+                    };
+                    break;
+                case 3:
+                    platillo = new Platillo
+                    {
+
+                    };
+                    break;
+                case 4:
+                    plato = new Plato
+                    {
+
+                    };
+                    break;
+                case 5:
+                    util = new Utiliza
+                    {
+
+                    };
+                    break;
+                default:
+                    MensajeError("Ocurrio un error inesperado");
+                    break;
+            }
+        
+    }
+        catch (Exception ex)
+        {
+            MensajeError("" + ex);
+        }
+    }
+
+    protected void OnTablaEncSelectCursorRow(object o, SelectCursorRowArgs args)
+    {
+
+    }
+
+    protected void btnBorrar_clicked(object sender, EventArgs e)
+    {
+        string delete;
+        MySqlCommand cmd;
+        try
+        {
+            switch (notebook3.Page)
+            {
+                case 0:
+                    categ = new Categoria
+                    {
+                        id_categoria = cmbeCatIdcateg.Entry.Text
+                    };
+                    delete = "DELETE FROM `categoria` " +
+                        $"WHERE categoria.id_categoria = '{categ.id_categoria}'";
+
+                    bd.Conectar();
+                    cmd = bd.ConsultarComando(delete, "");
+                    cmd.ExecuteNonQuery();
+                    Mensaje("Se a eliminado correctamente");
+                    bd.Desconectar();
+                    break;
+                case 1:
+                    enc = new Encargado
+                    {
+                        id_encargado = cmbeEncid.Entry.Text
+                    };
+                    delete = "DELETE FROM `encargado` " +
+                        $"WHERE encargado.id_encargado = '{enc.id_encargado}'";
+                    bd.Conectar();
+                    cmd = bd.ConsultarComando(delete, "");
+                    cmd.ExecuteNonQuery();
+                    Mensaje("Se a eliminado correctamente");
+                    bd.Desconectar();
+                    break;
+                case 2:
+                    ingred = new Ingred
+                    {
+                        id_ingrediente = cmbeIngid.Entry.Text
+                    };
+                    delete = "DELETE FROM `ingred` " +
+                        $"WHERE ingred.id_ingrediente = '{ingred.id_ingrediente}'";
+                    bd.Conectar();
+                    cmd = bd.ConsultarComando(delete, "");
+                    cmd.ExecuteNonQuery();
+                    Mensaje("Se a eliminado correctamente");
+                    bd.Desconectar();
+                    break;
+                case 3:
+                    platillo = new Platillo
+                    {
+                        id_platillo = cmbePlatilloId.Entry.Text
+                    };
+                    delete = "DELETE FROM `platillo` " +
+                        $"WHERE platillo.id_platillo = '{platillo.id_platillo}'";
+                    bd.Conectar();
+                    cmd = bd.ConsultarComando(delete, "");
+                    cmd.ExecuteNonQuery();
+                    Mensaje("Se a eliminado correctamente");
+                    bd.Desconectar();
+                    break;
+                case 4:
+                    plato = new Plato
+                    {
+                        id_plato = cmbePlatId.Entry.Text
+                    };
+                    delete = "DELETE FROM `plato` " +
+                        $"WHERE plato.id_plato = '{plato.id_plato}'";
+                    bd.Conectar();
+                    cmd = bd.ConsultarComando(delete, "");
+                    cmd.ExecuteNonQuery();
+                    Mensaje("Se a eliminado correctamente");
+                    bd.Desconectar();
+                    break;
+                case 5:
+                    util = new Utiliza
+                    {
+                        id_plato = cmbeUtilidPlat.Entry.Text,
+                        id_ingrediente = cmbeUtilidIngred.Entry.Text
+                    };
+                    delete = "DELETE FROM `utiliza` " +
+                        $"WHERE id_plato = '{util.id_plato}' AND " +
+                        	$"id_ingrediente = '{util.id_ingrediente}'";
+                    bd.Conectar();
+                    cmd = bd.ConsultarComando(delete, "");
+                    cmd.ExecuteNonQuery();
+                    Mensaje("Se a eliminado correctamente");
+                    bd.Desconectar();
+                    break;
+                default:
+                    MensajeError("Ocurrio un error inesperado");
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            MensajeError("" + ex);
+        }
     }
 }

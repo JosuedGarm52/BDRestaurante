@@ -13,7 +13,7 @@ namespace BDproj.Clases
             set { strFoto = value; }
         }
         private string dblPrecio;
-        public string Ingrediente
+        public string Precio
         {
             get { return dblPrecio; }
             set { dblPrecio = value; }
